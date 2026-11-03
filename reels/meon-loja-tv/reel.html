@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8">
+<style>
+:root{--blue:#2d25fe;--ink:#0d0a6e;--deep:#060d3d;--lime:#c6f432;--white:#fff;--cyan:#5ef2ff}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:#000}
+.scene{position:absolute;inset:0;display:none;overflow:hidden}
+.cam{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+.cam > img.photo{position:absolute;left:0;top:0;display:block}
+.grade{filter:contrast(1.08) saturate(1.12) brightness(.9)}
+img.cut{position:absolute;will-change:transform}
+.t{position:absolute;left:0;width:100%;text-align:center;font-family:'Inter Display','Inter',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.035em;line-height:.92;will-change:transform,opacity;color:#fff}
+.pill{display:inline-block;padding:.12em .36em .16em;border-radius:.28em}
+.small{font-family:'Inter',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.2em}
+.scrimTop{position:absolute;left:0;right:0;top:0;height:1050px;background:linear-gradient(180deg,rgba(4,6,40,.88) 0%,rgba(4,6,40,.55) 55%,rgba(4,6,40,0) 100%)}
+.scrimBot{position:absolute;left:0;right:0;bottom:0;height:700px;background:linear-gradient(0deg,rgba(4,6,40,.85) 0%,rgba(4,6,40,0) 100%)}
+.l3{position:absolute;left:60px;display:flex;align-items:stretch;gap:0;opacity:0;will-change:transform,opacity}
+.l3 .bar{width:14px;background:var(--lime);border-radius:4px 0 0 4px}
+.l3 .box{background:rgba(10,12,70,.62);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);padding:22px 34px 24px;border-radius:0 18px 18px 0;border:1px solid rgba(255,255,255,.12);border-left:0}
+.l3 .name{font-family:'Inter Display','Inter',sans-serif;font-weight:900;font-size:92px;line-height:.9;letter-spacing:-.03em;color:#fff;text-transform:uppercase}
+.l3 .sub{font-family:'Inter',sans-serif;font-weight:700;font-size:30px;letter-spacing:.18em;color:var(--lime);text-transform:uppercase;margin-top:12px;height:36px}
+.shadowE{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.55),rgba(0,0,0,0));}
+.m4{position:absolute;width:883px;height:441.6px;background:#2d25fe;border-radius:44px;overflow:hidden;transform-origin:0 0}
+.m4 .bars{position:absolute;left:379.5px;top:0;width:327.8px;height:100%;overflow:hidden}
+.m4 .bars img{position:absolute;left:0;width:322px}
+.m4 .bub{position:absolute;left:180.6px;top:77px;width:302.5px}
+.screen{position:absolute;overflow:hidden;background:#1d16d8}
+.screen .inner{position:absolute;left:0;top:0;width:840px;height:1410px;transform-origin:0 0;transform:scale(.33333);background:radial-gradient(120% 80% at 50% 0%,#3a33ff 0%,#2018e6 55%,#140fb0 100%)}
+.screen .glass{position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 35%,rgba(255,255,255,0) 70%,rgba(255,255,255,.07) 100%);pointer-events:none}
+#grain{position:absolute;inset:0;width:100%;height:100%;opacity:.06;mix-blend-mode:overlay;pointer-events:none}
+#vig{position:absolute;inset:0;background:radial-gradient(85% 65% at 50% 50%,transparent 55%,rgba(0,0,0,.5) 100%);pointer-events:none}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#fade{position:absolute;inset:0;background:#000;opacity:0}
+</style></head><body><div id="stage">
+
+<!-- S0 HOOK — mall corridor -->
+<div id="s0" class="scene">
+  <div id="cam0" class="cam" style="width:1450px;height:2576px"><img class="photo grade" src="img/store6.jpg" width="1450" height="2576"></div>
+  <div class="scrimTop"></div>
+  <img id="peek" class="cut" src="img/body_cut.png" style="height:1700px;left:560px;top:420px">
+  <div id="a1" class="t" style="top:300px;font-size:250px;color:var(--lime)">Psst.</div>
+  <div id="a2" class="t" style="top:545px;font-size:104px">Tu aí.</div>
+  <div id="a3" class="t" style="top:250px;font-size:108px">Estás a pagar<br>a Sport TV…</div>
+  <div id="a4" class="t" style="top:500px;font-size:92px;color:var(--ink)"><span class="pill" style="background:var(--lime)">…estás a pagar,<br>não estás?</span></div>
+</div>
+
+<!-- S1 MEON at the door -->
+<div id="s1" class="scene">
+  <div id="cam1" class="cam" style="width:1450px;height:2576px">
+    <img class="photo grade" src="img/store3.jpg" width="1450" height="2576">
+    <div class="shadowE" style="left:517px;top:1895px;width:460px;height:80px"></div>
+    <img id="meonDoor" class="cut" src="img/body_cut.png" style="height:1220px;left:340px;top:746px;filter:brightness(.97) saturate(1.05)">
+  </div>
+  <div class="scrimTop" style="height:820px;opacity:0" id="scr1"></div>
+  <div class="scrimBot"></div>
+  <div id="c1" class="t" style="top:170px;font-size:84px">Campanhas que</div>
+  <div id="c2" class="t" style="top:262px;font-size:96px;color:var(--ink)"><span class="pill" style="background:var(--lime)">mais ninguém tem</span></div>
+  <div id="stamp" style="position:absolute;left:770px;top:430px;width:240px;height:240px;border-radius:50%;background:var(--white);border:7px dashed var(--blue);display:flex;align-items:center;justify-content:center;opacity:0;box-shadow:0 20px 40px rgba(0,0,0,.35)">
+    <div class="t" style="position:static;font-size:42px;color:var(--blue);line-height:1">Exclu-<br>sivo</div></div>
+  <div id="l3" class="l3" style="top:1560px"><div class="bar"></div><div class="box"><div class="name">Eu sou o MEON</div><div class="sub" id="l3sub">Venho de 2050</div></div></div>
+</div>
+
+<!-- S2 SECRET -->
+<div id="s2" class="scene">
+  <div id="cam2" class="cam" style="width:1450px;height:2576px"><img class="photo grade" src="img/store3.jpg" width="1450" height="2576" style="filter:blur(14px) brightness(.6) saturate(1.2)"></div>
+  <div style="position:absolute;inset:0;background:rgba(6,8,50,.55)"></div>
+  <svg id="lock" viewBox="0 0 200 240" style="position:absolute;left:390px;top:420px;width:300px;height:360px;overflow:visible">
+    <path id="shackle" d="M55 110 V75 a45 45 0 0 1 90 0 V110" fill="none" stroke="#c6f432" stroke-width="22" stroke-linecap="round"/>
+    <rect x="25" y="105" width="150" height="125" rx="26" fill="#c6f432"/>
+    <circle cx="100" cy="158" r="16" fill="#0d0a6e"/><rect x="92" y="160" width="16" height="36" rx="6" fill="#0d0a6e"/>
+  </svg>
+  <div id="k1" class="t" style="top:860px;font-size:104px">Queres saber o</div>
+  <div id="k2" class="t" style="top:965px;font-size:190px;color:var(--lime)">segredo?</div>
+</div>
+
+<!-- S3 OFFER on the shop-window screen -->
+<div id="s3" class="scene">
+  <div id="cam3" class="cam" style="width:1450px;height:2576px">
+    <img class="photo grade" src="img/store1.jpg" width="1450" height="2576">
+    <div class="screen" style="left:958px;top:1126px;width:284px;height:474px">
+      <div class="inner" style="transform:scale(.338)">
+        <div id="sc_idle" class="t" style="top:520px;font-size:120px;color:rgba(255,255,255,.18)">2050</div>
+        <div id="m4a" class="m4" style="left:40px;top:70px;transform:scale(.9)">
+          <div class="bars"><img id="a_bar0" src="img/m4_bar0.png" style="top:93.2px"><img id="a_bar1" src="img/m4_bar1.png" style="top:164.5px"><img id="a_bar2" src="img/m4_bar2.png" style="top:233.5px"><img id="a_bar3" src="img/m4_bar3.png" style="top:302.5px"></div>
+          <img id="a_bub" class="bub" src="img/m4_bubble.png">
+        </div>
+        <div id="sc1" class="t" style="top:520px;font-size:250px;color:var(--lime)">+1&nbsp;€</div>
+        <div id="sc2" class="t" style="top:790px;font-size:128px">Sport TV</div>
+        <div id="sc3" class="t" style="top:960px;font-size:132px;color:var(--ink)"><span class="pill" style="background:var(--lime)">9 meses</span></div>
+        <div id="sc4" class="t small" style="top:1250px;font-size:30px;color:rgba(255,255,255,.7)">Só comigo</div>
+      </div>
+      <div class="glass"></div>
+    </div>
+  </div>
+  <div class="scrimBot" style="height:620px"></div>
+  <img id="pres" class="cut" src="img/portrait_cut.png" style="width:640px;left:-50px;top:1360px">
+  <div id="cap3" class="t small" style="top:1700px;left:560px;width:470px;text-align:left;font-size:26px;letter-spacing:.14em;line-height:1.35;opacity:0">TV · NET · VOZ · MÓVEL<br><span style="color:var(--lime)">+ Sport TV 9 meses</span></div>
+</div>
+
+<!-- S4 JOKE — storefront pan -->
+<div id="s4" class="scene">
+  <div id="cam4" class="cam" style="width:2576px;height:1450px">
+    <img class="photo grade" src="img/store2.jpg" width="2576" height="1450">
+    <div class="screen" style="left:1601px;top:642px;width:292px;height:500px;transform:skewY(-2.7deg);transform-origin:0 0">
+      <div class="inner" style="transform:scale(.3476);background:radial-gradient(120% 80% at 50% 0%,#d8ff5a 0%,#c6f432 60%,#a9d61c 100%)">
+        <div class="t small" style="top:300px;font-size:44px;color:var(--ink)">Em 2050</div>
+        <div id="scO" class="t" style="top:520px;font-size:200px;color:var(--blue)">Óbvio.</div>
+        <div class="t" style="top:900px;font-size:110px;color:var(--ink)">M4</div>
+      </div>
+      <div class="glass"></div>
+    </div>
+  </div>
+  <div class="scrimTop" style="height:900px"></div>
+  <div id="d0" class="t small" style="top:250px;font-size:30px;color:var(--lime)">Em 2050</div>
+  <div id="d1" class="t" style="top:320px;font-size:110px">chamamos<br>a isto…</div>
+  <div id="d2" class="t" style="top:560px;font-size:240px;color:var(--lime)">Óbvio.</div>
+  <img id="p4" class="cut" src="img/portrait_cut.png" style="width:760px;left:-90px;top:1180px">
+</div>
+
+<!-- S5 PACKSHOT -->
+<div id="s5" class="scene">
+  <div id="cam5" class="cam" style="width:2576px;height:1450px"><img class="photo" src="img/store4.jpg" width="2576" height="1450" style="filter:blur(16px) brightness(.75) saturate(1.2)"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(45,37,254,.70) 0%,rgba(45,37,254,.40) 45%,rgba(13,10,110,.85) 100%)"></div>
+  <img id="p5" class="cut" src="img/portrait_cut.png" style="width:900px;left:90px;top:900px;filter:drop-shadow(0 30px 50px rgba(0,0,30,.5))">
+  <div id="m4b" class="m4" style="left:98.5px;top:150px;box-shadow:0 30px 60px rgba(0,0,40,.45);border:2px solid rgba(255,255,255,.18)">
+    <div class="bars"><img id="b_bar0" src="img/m4_bar0.png" style="top:93.2px"><img id="b_bar1" src="img/m4_bar1.png" style="top:164.5px"><img id="b_bar2" src="img/m4_bar2.png" style="top:233.5px"><img id="b_bar3" src="img/m4_bar3.png" style="top:302.5px"></div>
+    <img id="b_bub" class="bub" src="img/m4_bubble.png">
+  </div>
+  <div id="e1" class="t" style="top:640px;font-size:100px">com Sport TV</div>
+  <div id="e2" class="t" style="top:752px;font-size:92px;color:var(--ink)"><span class="pill" style="background:var(--lime)">Só comigo</span></div>
+  <div id="btn" class="t" style="top:1430px;font-size:84px;color:var(--blue)"><span class="pill" style="background:#fff;padding:.24em .72em;border-radius:.6em;box-shadow:0 20px 40px rgba(0,0,40,.4)">Adere já&nbsp;→</span></div>
+  <div id="legal" style="position:absolute;left:0;right:0;top:1650px;height:84px;background:rgba(6,8,50,.82);opacity:0">
+    <div class="t small" style="top:29px;font-size:22px;letter-spacing:.06em">Campanha sujeita a condições. Consulta todos os detalhes.</div>
+  </div>
+</div>
+
+<canvas id="grain" width="360" height="640"></canvas>
+<div id="vig"></div>
+<div id="flash"></div>
+<div id="fade"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const p=(t,t0,d)=>clamp((t-t0)/d);
+const lerp=(a,b,k)=>a+(b-a)*k;
+const outExpo=x=>x===1?1:1-Math.pow(2,-10*x);
+const inOutCubic=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const inOutSine=x=>-(Math.cos(Math.PI*x)-1)/2;
+const outBack=x=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const outCubic=x=>1-Math.pow(1-x,3);
+function hash(n){const s=Math.sin(n*127.1)*43758.5453;return s-Math.floor(s)}
+function cam(el,s,cx,cy){el.style.transform=`translate(${540-cx*s}px,${960-cy*s}px) scale(${s})`}
+function pop(el,t,t0,d=0.45,rot=0){const x=p(t,t0,d);const k=x>0?outBack(x):0;el.style.opacity=x>0?1:0;el.style.transform=`scale(${k}) rotate(${rot}deg)`}
+function rise(el,t,t0,d=0.55,px=80){const k=outExpo(p(t,t0,d));el.style.opacity=k;el.style.transform=`translateY(${(1-k)*px}px)`;el.style.filter=k<1?`blur(${(1-k)*10}px)`:'none'}
+function hide(el,t,t0,d=0.2){const k=p(t,t0,d);if(k>0){el.style.opacity=(parseFloat(el.style.opacity)||0)*(1-k)}}
+function glitch(el,t,t0,dur,amt){if(t>=t0&&t<t0+dur){const f=Math.floor(t*30);const j=(hash(f)-.5)*amt;el.style.textShadow=`${j}px 0 #ff2bd6, ${-j}px 0 #5ef2ff`;}else el.style.textShadow='none'}
+function m4(pre,t,t0,bars,base){const card=$(pre==='a'?'m4a':'m4b');
+  const x=p(t,t0,0.5);const k=x>0?outBack(x):0;card.style.opacity=x>0?1:0;card.style.transform=`${base} scale(${0.8+0.2*k})`;
+  const bx=p(t,t0+0.12,0.5);const bk=bx>0?outBack(bx):0;$(pre+'_bub').style.opacity=bx>0?1:0;$(pre+'_bub').style.transform=`scale(${bk}) translateY(${Math.sin(t*3)*4}px)`;
+  bars.forEach((tb,i)=>{const kk=outExpo(p(t,tb,0.4));$(pre+'_bar'+i).style.transform=`translateX(${(kk-1)*340}px)`;});}
+// scenes + whip transitions
+const S=[['s0',0,5.95],['s1',5.95,11.85],['s2',11.85,13.0],['s3',13.0,20.5],['s4',20.5,24.15],['s5',24.15,99]];
+const WH=0.2; // half-length of whip
+function scenes(t){
+  S.forEach(([id,a,b],i)=>{const el=$(id);
+    const vis=(t>=a-(i?WH:0)&&t<b+(i<S.length-1?WH:0));
+    if(!vis){el.style.display='none';return}
+    el.style.display='block';
+    let x=0,blur=0,op=1;
+    if(i>0&&t<a+WH){const k=p(t,a-WH,2*WH);x=(1-inOutCubic(k))*1100;blur=(1-k)*40;op=k<.5?0:1}
+    if(i<S.length-1&&t>b-WH){const k=p(t,b-WH,2*WH);x=-inOutCubic(k)*1100;blur=k*40;op=k<.5?1:0}
+    el.style.transform=`translateX(${x}px)`;el.style.filter=blur>0.5?`blur(${blur}px)`:'none';el.style.opacity=op;
+    el.style.zIndex=op?2:1;
+  });
+  // flash at cuts
+  let f=0;S.slice(1).forEach(([,a])=>{const d=Math.abs(t-a);if(d<0.12)f=Math.max(f,(1-d/0.12)*.35)});$('flash').style.opacity=f;
+}
+const g=$('grain').getContext('2d');const img=g.createImageData(360,640);
+function grain(frame){let s=frame*7919+13;const d=img.data;for(let i=0;i<d.length;i+=4){s=(s*16807)%2147483647;const v=(s/2147483647)*255|0;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}g.putImageData(img,0,0)}
+window.render=function(t,frame){
+  frame=frame??Math.round(t*30); grain(frame); scenes(t);
+  // ---------- S0 hook
+  { const k=inOutSine(p(t,0,6)); cam($('cam0'),lerp(.7453,.83,k),725,lerp(1288,1220,k));
+    const k1=outExpo(p(t,0.3,0.8)), k2=outExpo(p(t,2.3,0.8));
+    $('peek').style.transform=`translate(${(1-k1)*520 - k2*90}px,${-k2*20}px) rotate(${-9+k2*4}deg)`; }
+  pop($('a1'),t,0.45,0.4,-3); hide($('a1'),t,2.15);
+  pop($('a2'),t,1.3,0.4,2); hide($('a2'),t,2.15);
+  rise($('a3'),t,2.35,0.5,60); if(t<2.35)$('a3').style.opacity=0;
+  pop($('a4'),t,4.35,0.45,-2);
+  // ---------- S1 door
+  { const k=inOutSine(p(t,5.95,6)); cam($('cam1'),lerp(.7453,.80,k),730,lerp(1288,1290,k));
+    // hologram materialise
+    const m=p(t,6.0,0.8); const clipTop=(1-m)*100;
+    const md=$('meonDoor'); md.style.clipPath=`inset(${clipTop}% 0 0 0)`;
+    const holo=(t<6.9)||(t>7.85&&t<8.3);
+    const fl=holo&&hash(Math.floor(t*30))>.4;
+    md.style.filter= holo?`brightness(${fl?1.35:1.12}) saturate(1.25) drop-shadow(0 0 26px rgba(94,242,255,.9)) drop-shadow(0 0 6px rgba(94,242,255,.9))`:'brightness(.97) saturate(1.05)';
+    md.style.opacity = holo&&fl? .82:1; }
+  { const k=outExpo(p(t,6.1,0.6)); const el=$('l3'); el.style.opacity=k; el.style.transform=`translateX(${(1-k)*-120}px)`;
+    const s=p(t,7.85,0.6); const txt='VENHO DE 2050'; $('l3sub').textContent=txt.slice(0,Math.round(txt.length*s)); glitch($('l3sub'),t,7.85,0.6,14);
+    if(t>9.4){const h=p(t,9.4,0.3);el.style.opacity=k*(1-h);} }
+  $('scr1').style.opacity=outCubic(p(t,9.5,0.4));
+  rise($('c1'),t,9.6,0.5,50); if(t<9.6)$('c1').style.opacity=0;
+  pop($('c2'),t,9.9,0.45,-2);
+  { const x=p(t,10.55,0.3);const k=x>0?outBack(x):0;$('stamp').style.opacity=x>0?1:0;$('stamp').style.transform=`scale(${2.2-1.2*k}) rotate(-14deg)`; }
+  // ---------- S2 secret
+  { const k=outCubic(p(t,11.85,1.2)); cam($('cam2'),lerp(1.1,1.3,k),740,1100); }
+  pop($('lock'),t,11.9,0.4);
+  { const o=outBack(p(t,12.75,0.25)); $('shackle').setAttribute('transform',`translate(${o*28} ${-o*26}) rotate(${o*18} 145 110)`); }
+  rise($('k1'),t,11.95,0.4,50); pop($('k2'),t,12.2,0.4,-2);
+  // ---------- S3 screen
+  { const k=inOutCubic(p(t,13.0,1.15)); const drift=p(t,14.15,6.4);
+    const s=Math.exp(lerp(Math.log(.7453),Math.log(2.2),k))*(1+0.05*drift);
+    cam($('cam3'),s,lerp(725,1100,k),lerp(1288,1363,k)+drift*-10); }
+  $('sc_idle').style.opacity = t<13.5?1:0;
+  m4('a',t,13.5,[14.6,15.62,15.8,16.35],'scale(.9)');
+  pop($('sc1'),t,17.05,0.4,-2); pop($('sc2'),t,18.1,0.4,0); pop($('sc3'),t,19.35,0.45,-3);
+  { const k=outCubic(p(t,19.8,0.4)); $('sc4').style.opacity=k; }
+  { const k=outExpo(p(t,13.4,0.8)); $('pres').style.transform=`translate(${(1-k)*-600}px,0) rotate(${(1-k)*-8}deg)`; }
+  { const k=outCubic(p(t,14.6,0.5)); $('cap3').style.opacity=k; $('cap3').style.transform=`translateY(${(1-k)*20}px)`; }
+  // ---------- S4 storefront pan
+  { const k=inOutSine(p(t,20.5,3.8)); cam($('cam4'),lerp(1.324,1.40,k),lerp(1320,1650,k),725); }
+  rise($('d0'),t,20.6,0.4,30); rise($('d1'),t,21.05,0.5,60);
+  pop($('d2'),t,23.45,0.32,-3); if(t>23.45&&t<23.9){$('d2').style.marginLeft=((hash(Math.floor(t*30))-.5)*24)+'px'}else $('d2').style.marginLeft='0px';
+  { const x=p(t,23.45,0.3);const k=x>0?outBack(x):0; $('scO').style.transform=`scale(${k||0.001})`; }
+  { const k=outExpo(p(t,20.55,0.7)); const laugh=(t>20.6&&t<21.3)?Math.sin(t*42)*5:0; $('p4').style.transform=`translate(${(1-k)*-500}px,${(1-k)*300+laugh}px) rotate(${6-(1-k)*10}deg)`; }
+  // ---------- S5 packshot
+  { const k=p(t,24.15,7); cam($('cam5'),1.45,lerp(1320,1240,k),725); }
+  { const k=outExpo(p(t,24.2,0.9)); $('p5').style.transform=`translateY(${(1-k)*700}px)`; }
+  m4('b',t,24.2,[24.45,24.55,24.65,24.75],'');
+  rise($('e1'),t,24.9,0.5,50);
+  pop($('e2'),t,26.12,0.4,-2);
+  pop($('btn'),t,27.05,0.45,0); if(t>27.5){$('btn').style.transform=`scale(${1+0.04*Math.sin((t-27.5)*7)})`}
+  $('legal').style.opacity=outCubic(p(t,27.9,0.3));
+  $('fade').style.opacity=p(t,30.6,0.6);
+};
+window.ready=Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode())]);
+</script></body></html>
