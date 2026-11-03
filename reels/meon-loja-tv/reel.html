@@ -119,7 +119,11 @@ img.cut{position:absolute;will-change:transform}
   <div id="d0" class="t small" style="top:250px;font-size:30px;color:var(--lime)">Em 2050</div>
   <div id="d1" class="t" style="top:320px;font-size:110px">chamamos<br>a isto…</div>
   <div id="d2" class="t" style="top:560px;font-size:240px;color:var(--lime)">Óbvio.</div>
-  <img id="p4" class="cut" src="img/portrait_cut.png" style="width:760px;left:-90px;top:1180px">
+  <div class="shadowE" id="k_sh" style="left:120px;top:1850px;width:520px;height:80px;opacity:0"></div>
+  <div id="meonK" style="position:absolute;left:-60px;top:770px;width:806px;height:1150px">
+    <img id="k_leg" src="img/meon_leg.png" style="position:absolute;left:416px;top:639px;width:174px;transform-origin:79px 0px">
+    <img src="img/meon_main.png" style="position:absolute;left:0;top:0;width:806px">
+  </div>
 </div>
 
 <!-- S5 PACKSHOT -->
@@ -175,7 +179,7 @@ function scenes(t){
     el.style.display='block';
     let x=0,blur=0,op=1;
     const iris=(a===24.15)||(b===24.15);
-    if(iris){ if(i===5&&t<24.1){el.style.display='none';return} if(i===4&&t>=24.1){el.style.display='none';return}
+    if(iris){ if(i===5&&t<24.15){el.style.display='none';return} if(i===4&&t>=24.15){el.style.display='none';return}
       el.style.transform='none';el.style.filter='none';el.style.opacity=1;el.style.zIndex=1;return; }
     if(i>0&&t<a+WH){const k=p(t,a-WH,2*WH);x=(1-inOutCubic(k))*1100;blur=(1-k)*40;op=k<.5?0:1}
     if(i<S.length-1&&t>b-WH){const k=p(t,b-WH,2*WH);x=-inOutCubic(k)*1100;blur=k*40;op=k<.5?1:0}
@@ -233,31 +237,43 @@ window.render=function(t,frame){
   rise($('d0'),t,20.6,0.4,30); rise($('d1'),t,21.05,0.5,60);
   pop($('d2'),t,23.45,0.32,-3); if(t>23.45&&t<23.9){$('d2').style.marginLeft=((hash(Math.floor(t*30))-.5)*24)+'px'}else $('d2').style.marginLeft='0px';
   { const x=p(t,23.45,0.3);const k=x>0?outBack(x):0; $('scO').style.transform=`scale(${k||0.001})`; }
-  { const k=outExpo(p(t,20.55,0.7)); const laugh=(t>20.6&&t<21.3)?Math.sin(t*42)*5:0; $('p4').style.transform=`translate(${(1-k)*-500}px,${(1-k)*300+laugh}px) rotate(${6-(1-k)*10}deg)`; }
+  { const k=outExpo(p(t,20.55,0.7)); const laugh=(t>20.6&&t<21.3)?Math.sin(t*42)*5:0;
+    $('meonK').style.transform=`translate(${(1-k)*-600}px,${laugh}px)`; $('k_sh').style.opacity=k*.9; $('k_sh').style.transform=`translateX(${(1-k)*-600}px)`;
+    // leg: wind-up 23.3-23.5 (+22), kick 23.5-23.62 (-70), hold, recover
+    let a=0; if(t>=23.3&&t<23.5){a=22*inOutCubic(p(t,23.3,0.2))} else if(t>=23.5&&t<23.62){const q=p(t,23.5,0.12);a=22-92*q*q} else if(t>=23.62&&t<23.85){a=-70} else if(t>=23.85){a=-70*(1-inOutCubic(p(t,23.85,0.3)))}
+    const leg=$('k_leg'); leg.style.transform=`rotate(${a}deg)`; leg.style.filter=(t>=23.5&&t<23.66)?'blur(3px)':'none';
+    // body leans back on the kick
+    if(t>=23.5&&t<24.1){const lb=Math.sin(p(t,23.5,0.6)*Math.PI);$('meonK').style.transform+=` rotate(${-4*lb}deg)`;$('meonK').style.transformOrigin='40% 70%';} }
   // Sport TV icon pop + 9 badge
   { const x=p(t,18.1,0.45);const k=x>0?outBack(x):0;const out=p(t,20.1,0.25);
     $('stIcon').style.opacity=x>0?(1-out):0; $('stIcon').style.transform=`scale(${k}) rotate(${10-4*k+Math.sin(t*3)*2}deg) translateY(${Math.sin(t*2.4)*6}px)`; }
   { const x=p(t,19.35,0.5);const k=x>0?outBack(x):0; $('sc3').style.opacity=x>0?1:0; $('sc3').style.transform=`scale(${k}) rotate(${(1-k)*-120}deg)`; }
-  // Sport TV ring iris 23.75-24.65
+  // Sport TV ring: ball drop, kick, flight, iris 22.9-24.7
   { const c=$('iris'), x=c.getContext('2d'); x.clearRect(0,0,1080,1920);
-    if(t>=23.72&&t<24.7){ const cx=540,cy=960,U=520;
-      let sc, hole=t>=24.1;
-      if(!hole){ const k=p(t,23.72,0.38); sc=outBack(k)*1.0; }
-      else { const k=p(t,24.1,0.55); sc=1+Math.pow(k,2.2)*9; }
-      const rot=(t-23.72)*40;
-      const ro=0.63*U*sc, ri=0.27*U*sc;
-      x.save(); x.translate(cx,cy); x.rotate(rot*Math.PI/180);
-      if(!hole){ // yellow rounded square grows, black ring
-        const side=Math.max(2*U*sc,1); const half=side/2;
-        x.fillStyle='#FFF200'; x.beginPath(); x.roundRect(-half,-half,side,side,side*.22); x.fill();
-        x.fillStyle='#000'; x.beginPath(); x.arc(0,0,ro,0,Math.PI*2); x.arc(0,0,ri,0,Math.PI*2,true); x.fill();
-        if(sc>=0.98){ x.restore(); x.fillStyle='#FFF200'; x.fillRect(0,0,1080,1920); x.save(); x.translate(cx,cy);
-          x.fillStyle='#000'; x.beginPath(); x.arc(0,0,ro,0,Math.PI*2); x.arc(0,0,ri,0,Math.PI*2,true); x.fill(); }
-      } else { // full yellow with black ring, hole transparent
-        x.restore(); x.save(); x.fillStyle='#FFF200'; x.beginPath(); x.rect(0,0,1080,1920); x.arc(cx,cy,ri,0,Math.PI*2,true); x.fill('evenodd');
-        x.fillStyle='#000'; x.beginPath(); x.arc(cx,cy,ro,0,Math.PI*2); x.arc(cx,cy,ri,0,Math.PI*2,true); x.fill('evenodd');
-      }
-      x.restore(); } }
+    const ballDraw=(cx,cy,R,sq)=>{ x.save(); x.translate(cx,cy); x.scale(1+sq,1-sq);
+      x.fillStyle='#FFF200'; x.beginPath(); x.arc(0,0,R,0,Math.PI*2); x.fill();
+      x.fillStyle='#000'; x.beginPath(); x.arc(0,0,.63*R,0,Math.PI*2); x.arc(0,0,.27*R,0,Math.PI*2,true); x.fill('evenodd');
+      x.fillStyle='rgba(255,255,255,.18)'; x.beginPath(); x.arc(-.35*R,-.4*R,.22*R,0,Math.PI*2); x.fill(); x.restore(); };
+    const shadow=(cx,R,o)=>{ const g=x.createRadialGradient(cx,1838,0,cx,1838,R*1.3); g.addColorStop(0,`rgba(0,0,0,${.5*o})`); g.addColorStop(1,'rgba(0,0,0,0)'); x.fillStyle=g; x.beginPath(); x.ellipse(cx,1838,R*1.3,R*.32,0,0,Math.PI*2); x.fill(); };
+    const RX=650, RY=1768, R0=70;
+    if(t>=22.9&&t<23.59){ // drop + 2 bounces
+      let cx,cy,sq=0;
+      if(t<23.15){const q=p(t,22.9,0.25); cx=lerp(930,RX,q); cy=lerp(-150,RY,q*q);} 
+      else if(t<23.38){const q=p(t,23.15,0.23); cx=RX; cy=RY-200*4*q*(1-q); if(q<.12)sq=.18*(1-q/.12);} 
+      else if(t<23.5){const q=p(t,23.38,0.12); cx=RX; cy=RY-60*4*q*(1-q); if(q<.15)sq=.12*(1-q/.15);} 
+      else {cx=RX;cy=RY;}
+      shadow(cx,R0,clamp(1-(RY-cy)/400)); ballDraw(cx,cy,R0,sq); }
+    else if(t>=23.59&&t<23.95){ const q=p(t,23.59,0.36); const e=q*q*(3-2*q);
+      const cx=lerp(RX,540,e), cy=lerp(RY,960,e)-Math.sin(q*Math.PI)*120, R=R0*Math.pow(520/R0,Math.pow(q,1.6));
+      if(q<.3)shadow(RX,R0,1-q/.3);
+      ballDraw(cx,cy,R,q<.08?-.2*(1-q/.08):0); }
+    else if(t>=23.95&&t<24.7){ const cx=540,cy=960,U=520;
+      if(t<24.15){ const k=p(t,23.95,0.2); const Ry=lerp(U,1200,k*k);
+        x.fillStyle='#FFF200'; x.beginPath(); x.arc(cx,cy,Ry,0,Math.PI*2); x.fill();
+        x.fillStyle='#000'; x.beginPath(); x.arc(cx,cy,.63*U,0,Math.PI*2); x.arc(cx,cy,.27*U,0,Math.PI*2,true); x.fill('evenodd'); }
+      else { const k=p(t,24.15,0.55); const sc=1+Math.pow(k,2.2)*9; const ro=.63*U*sc, ri=.27*U*sc;
+        x.fillStyle='#FFF200'; x.beginPath(); x.rect(0,0,1080,1920); x.arc(cx,cy,ri,0,Math.PI*2,true); x.fill('evenodd');
+        x.fillStyle='#000'; x.beginPath(); x.arc(cx,cy,ro,0,Math.PI*2); x.arc(cx,cy,ri,0,Math.PI*2,true); x.fill('evenodd'); } } }
   // ---------- S5 packshot
   { const k=p(t,24.15,7); cam($('cam5'),1.45,lerp(1320,1240,k),725); }
   { const k=outExpo(p(t,24.2,0.9)); $('p5').style.transform=`translateY(${(1-k)*700}px)`; }
